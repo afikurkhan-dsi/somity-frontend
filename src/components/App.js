@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { LoginPage } from './pages/LoginPage';
+import { Dashboard } from './pages/Dashboard';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
         <div className="">
           <div className="">
-            <LoginPage />
+            <Dashboard />
           </div>
         </div>
     );
