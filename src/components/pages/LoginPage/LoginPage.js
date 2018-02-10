@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
+import { userActions } from '../../../actions';
 import * as styles from './LoginPage.css';
 
 class LoginPage extends React.Component {
@@ -8,8 +10,7 @@ class LoginPage extends React.Component {
     this.state = {
       username: '',
       password: '',
-      submitted: false,
-      loggingIn: false
+      submitted: false
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -23,11 +24,18 @@ class LoginPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({ submitted: true, loggingIn: true});
+    
+    this.setState({ submitted: true });
+    const { username, password } = this.state;
+    const { dispatch } = this.props;
+    if (username && password) {
+        dispatch(userActions.login(username, password));
+    }
   }
 
   render() {
-    const { username, password, submitted, loggingIn } = this.state;
+    const { loggingIn } = this.props;
+    const { username, password, submitted } = this.state;
     return (
       <div  className={styles.LoginPage}>
         <div style={{width: '380px'}}>
@@ -71,4 +79,12 @@ class LoginPage extends React.Component {
   }
 }
 
-export {LoginPage};
+function mapStateToProps(state) {
+  const { loggingIn } = state.authentication;
+  return {
+      loggingIn
+  };
+}
+
+const connectedLoginPage = connect(mapStateToProps)(LoginPage)
+export { connectedLoginPage as LoginPage };
