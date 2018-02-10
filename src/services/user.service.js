@@ -1,5 +1,6 @@
 export const userService = {
   login,
+  logout,
 };
 
 function login(username, password) {
@@ -22,4 +23,9 @@ function login(username, password) {
       }
       return user;
     });
+}
+
+
+function logout() {
+  localStorage.removeItem('user');
 }

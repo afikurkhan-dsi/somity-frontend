@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 
 import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
@@ -15,7 +15,8 @@ class App extends Component {
             <Router history={history}>
               <div>
                 <Route exact path="/" component={LoginPage} />
-                <Route path="/dashboard" component={Dashboard} />
+                {localStorage.getItem('user') ? <Route path="/dashboard" component={Dashboard} /> :
+                  <Redirect to='/' /> }
               </div>
             </Router>
           </div>
