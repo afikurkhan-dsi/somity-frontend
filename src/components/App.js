@@ -14,9 +14,9 @@ class App extends Component {
           <div className="">
             <Router history={history}>
               <div>
-                <Route exact path="/" component={LoginPage} />
+                <Route exact path="/login" component={LoginPage} />
                 {localStorage.getItem('user') ? <Route path="/dashboard" component={Dashboard} /> :
-                  <Redirect to='/' /> }
+                  <Redirect to='/login' /> }
               </div>
             </Router>
           </div>

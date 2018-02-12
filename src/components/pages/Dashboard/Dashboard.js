@@ -11,11 +11,16 @@ class Dashboard extends React.Component {
     this.logoutHandle = this.logoutHandle.bind(this);
   }
 
+  componentDidMount() {
+    this.props.dispatch(userActions.getAll());
+  }
+
   logoutHandle() { 
     this.props.dispatch(userActions.logout());
   }
 
   render() {
+    const { users } = this.props;
     return (
       <div className="col-md-6 col-md-offset-3">
           <h1>Hi User!</h1>
@@ -24,16 +29,28 @@ class Dashboard extends React.Component {
           <p>
               <Link to="/" onClick={this.logoutHandle}>Logout</Link>
           </p>
+
+          <ul>
+          {users.items &&
+              <ul>
+                  {users.items.map((user, index) =>
+                      <li key={index}>
+                          {user.firstName + ' ' + user.lastName}
+                      </li>
+                  )}
+              </ul>
+            }
+          </ul>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { authentication } = state;
-  const { user } = authentication;
+  const { users } = state;
+
   return {
-    user
+    users
   }
 }
 
