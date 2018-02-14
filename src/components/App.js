@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Redirect } from 'react-router-dom';
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
@@ -14,9 +14,11 @@ class App extends Component {
           <div className="">
             <Router history={history}>
               <div>
-                <Route exact path="/login" component={LoginPage} />
-                {localStorage.getItem('user') ? <Route path="/dashboard" component={Dashboard} /> :
-                  <Redirect to='/login' /> }
+                <Switch>
+                  <Route exact path="/login" component={LoginPage} />
+                  {localStorage.getItem('user') ? <Route path="/dashboard" component={Dashboard} /> :
+                    <Redirect to='/login' /> }
+                </Switch>
               </div>
             </Router>
           </div>

@@ -6,8 +6,8 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './helpers';
 // setup fake backend
-import { configureFakeBackend } from './helpers';
-configureFakeBackend();
+// import { configureFakeBackend } from './helpers';
+// configureFakeBackend();
 
 
 ReactDOM.render(

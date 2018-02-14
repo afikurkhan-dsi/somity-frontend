@@ -1,6 +1,6 @@
 import { authHeader } from '../helpers';
 
-const URL = 'http://10.0.0.12:3000/api/v1.0.0';
+const URL = 'http://localhost:8000/api/v1.0.0';
 
 export const userService = {
   login,
@@ -14,7 +14,6 @@ function login(username, password) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({'Username': username, 'Password': password})
-    // body: JSON.stringify({ username, password})
   };
 
   return fetch(URL + '/user_sessions', requestOption)
@@ -43,9 +42,8 @@ function getAll() {
     method: 'GET',
     headers: authHeader()
   };
-  const uri = URL + '/users?token='+ JSON.parse(localStorage.getItem('user')).token;
 
-  return fetch(uri, requestOptions)
+  return fetch(URL + '/users', requestOptions)
     .then(response => {
       if (!response.ok) {
         return Promise.reject(response.statusText);

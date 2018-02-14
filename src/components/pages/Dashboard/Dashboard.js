@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
           <p>You're logged in!!</p>
           
           <p>
-              <Link to="/" onClick={this.logoutHandle}>Logout</Link>
+              <Link to="/login" onClick={this.logoutHandle}>Logout</Link>
           </p>
 
           <ul>
@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
               <ul>
                   {users.items.map((user, index) =>
                       <li key={index}>
-                          {user.firstName + ' ' + user.lastName}
+                          {user.FirstName + ' ' + user.LastName}
                       </li>
                   )}
               </ul>
