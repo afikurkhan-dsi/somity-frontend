@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link, Route, Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { history } from '../../../helpers';
 import { userActions } from '../../../actions';
 
-const UserPage = () => <div>Userpage</div>
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -13,6 +11,7 @@ class Dashboard extends React.Component {
 
     this.logoutHandle = this.logoutHandle.bind(this);
     this.loadUsers = this.loadUsers.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   loadUsers() {
@@ -21,6 +20,11 @@ class Dashboard extends React.Component {
 
   logoutHandle() { 
     this.props.dispatch(userActions.logout());
+  }
+
+  deleteUser(id) {
+    this.props.dispatch(userActions.deleteUser(id));
+    alert(id);
   }
 
   render() {
@@ -49,6 +53,7 @@ class Dashboard extends React.Component {
                     <th scope="col">Email</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -60,15 +65,17 @@ class Dashboard extends React.Component {
                             <td>{user.Email}</td>
                             <td>{user.Phone}</td>
                             <td>{user.Address}</td>
+                            <td>
+                              <button
+                                onClick={() => this.deleteUser(user._id)} 
+                                className="btn btn-danger btn-sm">Delete</button>
+                            </td>
                         </tr>
                     )}
                 </tbody>
               </table>
             }
-            <Router history={history}>
-              <Route path="/{UserId}" component={UserPage} />
-            </Router>
-        </div>
+          </div>
         </div>
       </div>
     );

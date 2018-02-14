@@ -5,7 +5,8 @@ import { userConstants } from '../constants';
 export const userActions = {
   login,
   logout,
-  getAll
+  getAll,
+  deleteUser
 };
 
 function login(username, password) {
@@ -48,4 +49,21 @@ function getAll() {
   function request() { return { type: userConstants.GETALL_REQUEST } }
   function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
   function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+
+function deleteUser(id) {
+  return dispatch => {
+      dispatch(request());
+
+      userService.deleteUser(id)
+          .then(
+              response => dispatch(success()),
+              error => dispatch(failure(error))
+          );
+  };
+
+  function request() { return { type: userConstants.DELETE_REQUEST } }
+  function success(response) { return { type: userConstants.DELETE_SUCCESS, response } }
+  function failure(error) { return { type: userConstants.DELETE_FAILURE, error } }
 }

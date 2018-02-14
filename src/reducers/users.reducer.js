@@ -14,6 +14,18 @@ export function users(state = {}, action) {
       return { 
         error: action.error
       };
+    case userConstants.DELETE_REQUEST:
+      return {
+        deleting: true
+      }
+    case userConstants.DELETE_SUCCESS:
+      return {
+        deleted: true
+      }
+    case userConstants.DELETE_FAILURE:
+      return {
+        error: action.error
+      }
     default:
       return state
   }

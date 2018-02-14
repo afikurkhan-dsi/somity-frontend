@@ -6,7 +6,8 @@ export const userService = {
   login,
   logout,
   getAll,
-  getById
+  getById,
+  deleteUser
 };
 
 function login(username, password) {
@@ -58,6 +59,21 @@ function getById(userId) {
     headers: authHeader()
   };
   return fetch(URL+ '/users/' + userId, requestOptions)
+    .then(response => {
+      if(!response.ok) {
+        return Promise.reject(response.statusText);
+      }
+      return response.json();
+    })
+}
+
+
+function deleteUser(UserId) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: authHeader()
+  };
+  return fetch(URL+ '/users/' + UserId, requestOptions)
     .then(response => {
       if(!response.ok) {
         return Promise.reject(response.statusText);
