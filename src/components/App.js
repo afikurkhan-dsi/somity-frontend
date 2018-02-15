@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
 import { UserCreatePage } from './pages/UserCreatePage';
-import './App.css';
+import { Profile } from './pages/Profile';
 
-const UserPage = () => <div><h1>Hello</h1></div>
+import './App.css';
 
 class App extends Component {
   render() {
@@ -20,7 +20,7 @@ class App extends Component {
                   {localStorage.getItem('user') ? <Route exact path="/dashboard" component={Dashboard} /> :
                     <Redirect to='/login' /> }
                     <Route path="/dashboard/users/create" component={UserCreatePage} />
-                    <Route path="/dashboard/:UserId" component={UserPage} />
+                    <Route path="/dashboard/:UserId" component={Profile} />
                 </Switch>
                 
               </div>
