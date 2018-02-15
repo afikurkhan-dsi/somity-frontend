@@ -30,8 +30,8 @@ class Dashboard extends React.Component {
   render() {
     const { users } = this.props;
     return (
-      <div className="row">
-        <div className="container">
+      <div className="container">
+        <div className="row">
           <div className="col-12">
             <div className="jumbotron">
               <h4>Hello Administrator! <small><Link to="/login" onClick={this.logoutHandle}>Logout</Link></small></h4>
@@ -39,7 +39,14 @@ class Dashboard extends React.Component {
               <p className="lead">
                 <button
                   onClick={this.loadUsers}
-                  className="btn btn-primary btn-lg">Load Users</button>
+                  className="btn btn-primary btn-lg">
+                
+                  Load Users
+                </button>
+                &nbsp;&nbsp;
+                <Link
+                  className="btn btn-primary btn-lg" 
+                  to="/dashboard/users/create">Create New User</Link>
               </p>
             </div>
 

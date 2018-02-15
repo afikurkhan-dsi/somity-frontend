@@ -7,7 +7,8 @@ export const userService = {
   logout,
   getAll,
   getById,
-  deleteUser
+  deleteUser,
+  create
 };
 
 function login(username, password) {
@@ -80,4 +81,30 @@ function deleteUser(UserId) {
       }
       return response.json();
     })
+}
+
+function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive) {
+  const requestOptions = {
+    method: 'POST',
+    headers: authHeader(),
+    body: JSON.stringify({
+      "Username": Username,
+      "Password": Password,
+      "FirstName": FirstName,
+      "LastName": LastName,
+      "IsActive": IsActive,
+      "Email": Email,
+      "Phone": Phone,
+      "Address": Address,
+      "Scope": "admin"
+    })
+  };
+
+  return fetch(URL + '/users', requestOptions)
+    .then(response => {
+      if(!response.ok) {
+        return Promise.reject(response.statusText);
+      }
+      return response.json();
+    });
 }

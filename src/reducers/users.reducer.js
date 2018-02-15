@@ -26,6 +26,19 @@ export function users(state = {}, action) {
       return {
         error: action.error
       }
+    case userConstants.CREATE_REQUEST:
+      return {
+        creating: true
+      }
+    case userConstants.CREATE_SUCCESS:
+      return {
+        created: true,
+        user: action.user
+      }
+    case userConstants.CREATE_FAILURE:
+      return {
+        error: action.error
+      }
     default:
       return state
   }

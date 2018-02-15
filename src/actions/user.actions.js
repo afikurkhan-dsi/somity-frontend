@@ -6,6 +6,7 @@ export const userActions = {
   login,
   logout,
   getAll,
+  create,
   deleteUser
 };
 
@@ -51,6 +52,21 @@ function getAll() {
   function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
 }
 
+function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive) {
+  return dispatch => {
+      dispatch(request());
+
+      userService.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive)
+          .then(
+              user => dispatch(success(user)),
+              error => dispatch(failure(error))
+          );
+  };
+
+  function request() { return { type: userConstants.CREATE_REQUEST } }
+  function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
+}
 
 function deleteUser(id) {
   return dispatch => {

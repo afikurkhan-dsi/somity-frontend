@@ -3,8 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import { LoginPage } from './pages/LoginPage';
 import { Dashboard } from './pages/Dashboard';
-// import { history } from '../helpers';
-
+import { UserCreatePage } from './pages/UserCreatePage';
 import './App.css';
 
 const UserPage = () => <div><h1>Hello</h1></div>
@@ -20,6 +19,7 @@ class App extends Component {
                   <Route exact path="/login" component={LoginPage} />
                   {localStorage.getItem('user') ? <Route exact path="/dashboard" component={Dashboard} /> :
                     <Redirect to='/login' /> }
+                    <Route path="/dashboard/users/create" component={UserCreatePage} />
                     <Route path="/dashboard/:UserId" component={UserPage} />
                 </Switch>
                 
