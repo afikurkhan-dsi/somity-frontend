@@ -3,7 +3,7 @@ export function authHeader() {
 
   if (user && user.token) {
     return {
-      'Content-Type': 'appliation/json',
+      'Content-Type': 'application/json',
       'Authorization': user.token
     };
 
