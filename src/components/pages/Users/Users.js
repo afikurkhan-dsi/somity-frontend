@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { userActions } from '../../../actions';
+import { Spinner } from '../../common/Spinner';
 
 class Users extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class Users extends React.Component {
     const { users } = this.props;
     return (
       <div>
+        {users.loading ? <Spinner color={'#000'} /> : null}
         {users.items &&
           <table className="table table-striped table-dark">
             <thead>

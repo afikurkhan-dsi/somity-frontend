@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { userActions } from '../../../actions';
+import { Spinner } from '../../common/Spinner';
 import * as styles from './LoginPage.css';
 
 class LoginPage extends React.Component {
@@ -72,7 +73,7 @@ class LoginPage extends React.Component {
                   <div className={styles.FormGroup}>
                       <button type="submit" className={styles.LoginButton}>
                         Login
-                        {loggingIn && <div className={styles.Loader}>Loading...</div>}
+                        {loggingIn && <Spinner />}
                       </button>
                   </div>
               </form>
