@@ -13,7 +13,7 @@ class Profile extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1>Profile</h1>
+            <h3 className="text-uppercase text-center">Profile</h3>
             <hr/>
             { this.props.user &&
             <div className="userInfo">
