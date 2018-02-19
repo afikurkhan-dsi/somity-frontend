@@ -83,7 +83,7 @@ function deleteUser(UserId) {
     })
 }
 
-function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive) {
+function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) {
   const requestOptions = {
     method: 'POST',
     headers: authHeader(),
@@ -96,7 +96,7 @@ function create(Username, FirstName, LastName, Email, Phone, Address, Password, 
       "Email": Email,
       "Phone": Phone,
       "Address": Address,
-      "Scope": "admin"
+      "Scope": Scope
     })
   };
 

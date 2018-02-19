@@ -19,8 +19,9 @@ class UserCreatePage extends React.Component {
     const Address = this.refs.Address.value;
     const Password = this.refs.Password.value;
     const IsActive = this.refs.IsActive.checked;
+    const Scope = this.refs.Scope.value;
 
-    this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive));
+    this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
   }
 
 
@@ -119,6 +120,14 @@ class UserCreatePage extends React.Component {
                   id="IsActive"
                   ref="IsActive" />
                 <label className="form-check-label" htmlFor="IsActive">IsActive ?</label>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="Scope">Select Type</label>
+                <select name="Scope" id="Scope" ref="Scope">
+                  <option value="admin">Admin</option>
+                  <option value="member">Member</option>
+                </select>
               </div>
               <button 
                 type="submit" 

@@ -69,11 +69,11 @@ function get(UserId) {
   function failure(error) { return { type: userConstants.GET_FAILURE, error } }
 }
 
-function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive) {
+function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) {
   return dispatch => {
       dispatch(request());
 
-      userService.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive)
+      userService.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope)
           .then(
               user => dispatch(success(user)),
               error => dispatch(failure(error))
