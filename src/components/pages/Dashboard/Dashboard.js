@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { userActions } from '../../../actions';
@@ -21,6 +21,8 @@ class Dashboard extends React.Component {
   render() {
     const { match } = this.props;
     return (
+      <div>
+        {localStorage.getItem('user') ? null : <Redirect to='/login' /> }
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -52,6 +54,7 @@ class Dashboard extends React.Component {
             </Switch>
           </div>
         </div>
+      </div>
       </div>
     );
   }
