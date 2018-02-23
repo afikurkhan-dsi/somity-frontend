@@ -6,6 +6,7 @@ import { userActions } from '../../../actions';
 import { Users } from '../Users';
 import { UserCreatePage } from '../UserCreatePage';
 import { Profile } from '../Profile';
+import { Payments } from '../Payments';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -44,13 +45,22 @@ class Dashboard extends React.Component {
                 &nbsp;&nbsp;
                 <Link
                   className="btn btn-primary btn-lg" 
-                  to="/dashboard/users/create">Create New User</Link>
+                  to="/dashboard/users/create">
+                  Create New User
+                </Link>
+                &nbsp;&nbsp;
+                <Link
+                  className="btn btn-primary btn-lg"
+                  to={`${match.url}/payments`}>
+                  Payment Statistics
+                </Link>
               </p>
             </div>
             <Switch>
               <Route exact path={`${match.url}/users`} component={Users} />
               <Route exact path={`${match.url}/users/create`} component={UserCreatePage} />
               <Route path={`${match.url}/users/:UserId`} component={Profile} />
+              <Route path={`${match.url}/payments`} component={Payments} />
             </Switch>
           </div>
         </div>
