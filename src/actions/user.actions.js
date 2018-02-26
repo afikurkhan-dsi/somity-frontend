@@ -1,6 +1,7 @@
 import { userService } from '../services';
 import { history } from '../helpers';
 import { userConstants } from '../constants';
+import { handleError } from './handler.actions';
 
 export const userActions = {
   login,
@@ -39,64 +40,60 @@ function logout() {
 
 function getAll() {
   return dispatch => {
-      dispatch(request());
+    dispatch(request());
 
-      userService.getAll()
-          .then(
-              users => dispatch(success(users)),
-              error => dispatch(failure(error))
-          );
+    userService.getAll()
+      .then(
+        users => dispatch(success(users)),
+        error => handleError(dispatch, userConstants.GETALL_FAILURE, error)
+      );
   };
 
   function request() { return { type: userConstants.GETALL_REQUEST } }
   function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-  function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
 }
 
 function get(UserId) {
   return dispatch => {
-      dispatch(request());
+    dispatch(request());
 
-      userService.get(UserId)
-          .then(
-              user => dispatch(success(user)),
-              error => dispatch(failure(error))
-          );
+    userService.get(UserId)
+      .then(
+        user => dispatch(success(user)),
+        error => handleError(dispatch, userConstants.GETALL_FAILURE, error)
+      );
   };
 
   function request() { return { type: userConstants.GET_REQUEST } }
   function success(user) { return { type: userConstants.GET_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.GET_FAILURE, error } }
 }
 
 function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) {
   return dispatch => {
-      dispatch(request());
+    dispatch(request());
 
-      userService.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope)
-          .then(
-              user => dispatch(success(user)),
-              error => dispatch(failure(error))
-          );
+    userService.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope)
+      .then(
+        user => dispatch(success(user)),
+        error => handleError(dispatch, userConstants.GETALL_FAILURE, error)
+      );
   };
 
   function request() { return { type: userConstants.CREATE_REQUEST } }
   function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
 }
 
 function deleteUser(id) {
   return dispatch => {
-      dispatch(request());
+    dispatch(request());
 
-      userService.deleteUser(id)
-          .then(
-              response => dispatch(success()),
-              error => dispatch(failure(error))
-          );
+    userService.deleteUser(id)
+      .then(
+        response => dispatch(success()),
+        error => handleError(dispatch, userConstants.GETALL_FAILURE, error)
+      );
   };
 
   function request() { return { type: userConstants.DELETE_REQUEST } }
   function success(response) { return { type: userConstants.DELETE_SUCCESS, response } }
-  function failure(error) { return { type: userConstants.DELETE_FAILURE, error } }
 }

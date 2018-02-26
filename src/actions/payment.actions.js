@@ -1,5 +1,6 @@
 import { paymentService } from '../services';
 import { paymentConstants } from '../constants';
+import { handleError } from './handler.actions';
 
 export const paymentActions = {
   getStatistics,
@@ -12,11 +13,10 @@ function getStatistics(FromDate, ToDate) {
     paymentService.getStatistics(FromDate, ToDate)
       .then(
         statistics => dispatch(success(statistics)),
-        error => dispatch(failure(error))
+        error => handleError(dispatch, paymentConstants.STATISTICS_FAILURE, error)
       )
   }
 
   function request() { return { type: paymentConstants.STATISTICS_REQUEST } }
   function success(data) { return { type: paymentConstants.STATISTICS_SUCCESS, data } }
-  function failure(error) { return { type: paymentConstants.STATISTICS_FAILURE, error } }
 }
