@@ -25,7 +25,7 @@ class UserCreatePage extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="CreateUserPage">
         <div className="row">
           <div className="col-6">
             <h3>Create New User</h3>
@@ -108,6 +108,14 @@ class UserCreatePage extends React.Component {
                   required />
               </div>
 
+              <div className="form-group">
+                <label htmlFor="Scope">Select Type</label>
+                <select name="Scope" id="Scope" ref="Scope" className="form-control">
+                  <option value="admin">Admin</option>
+                  <option value="member">Member</option>
+                </select>
+              </div>
+              
               <div className="form-check">
                 <input 
                   type="checkbox" 
@@ -118,17 +126,12 @@ class UserCreatePage extends React.Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="Scope">Select Type</label>
-                <select name="Scope" id="Scope" ref="Scope">
-                  <option value="admin">Admin</option>
-                  <option value="member">Member</option>
-                </select>
+                <button 
+                  type="submit" 
+                  className="btn btn-primary">
+                  Submit
+                </button>
               </div>
-              <button 
-                type="submit" 
-                className="btn btn-primary">
-                Submit
-              </button>
             </form>
           </div>
         </div>
