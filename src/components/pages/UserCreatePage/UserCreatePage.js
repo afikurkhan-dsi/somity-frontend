@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import swal from 'sweetalert';
 import { userActions } from '../../../actions';
 
 class UserCreatePage extends React.Component {
@@ -24,11 +23,7 @@ class UserCreatePage extends React.Component {
     this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
   }
 
-
   render() {
-    if(this.props.created) {
-      swal("Good job!", "User Created Successfully!", "success");
-    }
     return (
       <div className="container">
         <div className="row">
@@ -142,12 +137,5 @@ class UserCreatePage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { created } = state.users;
-  return {
-    created
-  }
-}
-
-const ConnectedUserCreatePage = connect(mapStateToProps)(UserCreatePage);
+const ConnectedUserCreatePage = connect()(UserCreatePage);
 export { ConnectedUserCreatePage as UserCreatePage };

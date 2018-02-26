@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, NavLink, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import swal from 'sweetalert';
 
 import { userActions } from '../../../actions';
 import { Users } from '../Users';
@@ -23,6 +24,9 @@ class Dashboard extends React.Component {
 
   render() {
     const { match } = this.props;
+    if(this.props.created) {
+      swal("Good job!", "User Created Successfully!", "success");
+    }
     return (
       <div>
         {localStorage.getItem('user') ? null : <Redirect to='/login' /> }
@@ -82,7 +86,10 @@ class Dashboard extends React.Component {
               </div>
               <Switch>
                 <Route exact path={`${match.url}/users`} component={Users} />
-                <Route exact path={`${match.url}/users/create`} component={UserCreatePage} />
+                { this.props.created ?
+                  <Redirect to={`${match.url}/users`} /> :
+                  <Route exact path={`${match.url}/users/create`} component={UserCreatePage} />
+                }
                 <Route path={`${match.url}/users/:UserId`} component={Profile} />
                 <Route path={`${match.url}/payments`} component={Payments} />
               </Switch>
@@ -96,9 +103,11 @@ class Dashboard extends React.Component {
 
 function mapStateToProps(state) {
   const { user, username } = state.authentication;
+  const { created } = state.users;
   return {
     user,
-    username
+    username,
+    created
   }
 }
 
