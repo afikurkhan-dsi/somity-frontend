@@ -1,4 +1,5 @@
 import { authHeader } from '../helpers';
+import { handler } from './handler.service';
 import URL from './url';
 
 export const paymentService = {
@@ -12,10 +13,5 @@ function getStatistics(FromDate, ToDate) {
   };
 
   return fetch(URL+ `/financial_statistics`, requestOptions)
-    .then(response => {
-      if(!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    });
+    .then(response => handler(response));
 }

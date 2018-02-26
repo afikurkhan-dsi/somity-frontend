@@ -1,4 +1,5 @@
 import { authHeader } from '../helpers';
+import { handler } from './handler.service';
 import URL from './url';
 
 export const userService = {
@@ -18,12 +19,7 @@ function login(username, password) {
   };
 
   return fetch(URL + '/user_sessions', requestOption)
-    .then(response => {
-      if(!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    })
+    .then(response => handler(response))
     .then(user => {
       if(user && user.token) {
         localStorage.setItem('user', JSON.stringify(user));
@@ -45,12 +41,7 @@ function getAll() {
   };
 
   return fetch(URL + '/users', requestOptions)
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-       }
-       return response.json();
-    });
+    .then(response => handler(response));
 }
 
 function get(userId) {
@@ -59,12 +50,7 @@ function get(userId) {
     headers: authHeader()
   };
   return fetch(URL+ '/users/' + userId, requestOptions)
-    .then(response => {
-      if(!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    })
+    .then(response => handler(response))
 }
 
 
@@ -74,12 +60,7 @@ function deleteUser(UserId) {
     headers: authHeader()
   };
   return fetch(URL+ '/users/' + UserId, requestOptions)
-    .then(response => {
-      if(!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    })
+    .then(response => handler(response))
 }
 
 function create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) {
@@ -100,10 +81,5 @@ function create(Username, FirstName, LastName, Email, Phone, Address, Password, 
   };
 
   return fetch(URL + '/users', requestOptions)
-    .then(response => {
-      if(!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    });
+    .then(response => handler(response));
 }
