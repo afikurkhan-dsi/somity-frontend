@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import { userActions } from '../../../actions';
 import { Spinner } from '../../common';
@@ -11,16 +12,32 @@ class Users extends React.Component {
     this.deleteUser = this.deleteUser.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(userActions.getAll());
   }
 
-  deleteUser(id) {
-    this.props.dispatch(userActions.deleteUser(id));
+  deleteUser(user) {
+    swal({
+      title: "Are you sure?",
+      text: `${user.FirstName} ${user.LastName} will be deleted permanently`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.props.dispatch(userActions.deleteUser(user._id));
+        swal(`Poof! ${user.FirstName} ${user.LastName} has been deleted!`, {
+          icon: "success",
+        });
+      }
+    });
   }
 
   render() {
     const { users } = this.props;
+    const { deleteUser } = this;
+
     return (
       <div>
         {users.loading ? <Spinner color={'#000'} /> : null}
@@ -48,8 +65,8 @@ class Users extends React.Component {
                         <td>{user.Address}</td>
                         <td>
                           <button
-                            onClick={() => this.deleteUser(user._id)} 
-                            className="btn btn-danger btn-sm">Delete</button>
+                            onClick={() => deleteUser(user)} 
+                            className="btn btn-outline-danger btn-sm">Delete</button>
                         </td>
                     </tr>
                 )}
