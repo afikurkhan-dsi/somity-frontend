@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { userActions } from '../../../actions';
-import { Spinner } from '../../common/Spinner';
+import { Spinner } from '../../common';
 
 class Users extends React.Component {
   constructor(props) {

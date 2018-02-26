@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { userActions } from '../../../actions';
-import { Spinner } from '../../common/Spinner';
+import { Spinner } from '../../common';
 import * as styles from './LoginPage.css';
 
 class LoginPage extends React.Component {
