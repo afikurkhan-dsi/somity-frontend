@@ -25,8 +25,8 @@ class Users extends React.Component {
       <div>
         {users.loading ? <Spinner color={'#000'} /> : null}
         {users.items &&
-          <table className="table table-striped table-dark">
-            <thead>
+          <table className="table table-striped">
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">Username</th>
                 <th scope="col">First Name</th>

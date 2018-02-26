@@ -31,9 +31,9 @@ class UserCreatePage extends React.Component {
     }
     return (
       <div className="container">
-        <div className="row justify-content-center">
+        <div className="row">
           <div className="col-6">
-            <h1>Create New User</h1>
+            <h3>Create New User</h3>
             <hr/>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
