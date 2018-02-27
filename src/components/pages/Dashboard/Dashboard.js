@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, NavLink, Link, Switch, Redirect } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import swal from 'sweetalert';
 
@@ -8,8 +8,10 @@ import { Users } from '../Users';
 import { UserCreatePage } from '../UserCreatePage';
 import { Profile } from '../Profile';
 import { Payments } from '../Payments';
-
+import { SidebarNavigation } from './Navigation';
 import * as styles from './Dashboard.css';
+
+import FaHome from 'react-icons/lib/fa/home';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class Dashboard extends React.Component {
           <Link 
             className={[styles.navbarBrand, "navbar-brand col-sm-3 col-md-2 mr-0"].join(' ')}
             to={`${match.url}`}>
-            Home
+            <FaHome /> Somity
           </Link>
           <input className={[styles.FormControl, styles.FormControlDark, "form-control form-control-dark w-100"].join(' ')} type="text" placeholder="Search" aria-label="Search" />
           <ul className="navbar-nav px-3">
@@ -47,38 +49,7 @@ class Dashboard extends React.Component {
 
         <div className="container-fluid">
           <div className="row">
-            <nav className={[styles.sidebar, "col-md-2 d-none d-md-block bg-light"].join(' ')}>
-              <div className={styles.sidebarSticky}>
-                <ul className="nav flex-column">
-                  <li className="nav-item">
-                    <NavLink
-                      exact
-                      to={`${match.url}/users`}
-                      className={styles.NavLink}
-                      activeClassName={styles.active}>
-                      Users
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      exact
-                      className={styles.NavLink}
-                      activeClassName={styles.active} 
-                      to="/dashboard/users/create">
-                      Create New User
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className={styles.NavLink}
-                      activeClassName={styles.active}
-                      to={`${match.url}/payments`}>
-                      Payment Statistics
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            </nav>
+            <SidebarNavigation match={match}/>
 
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
               <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
