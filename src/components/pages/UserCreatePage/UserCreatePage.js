@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import { userActions } from '../../../actions';
 
 class UserCreatePage extends React.Component {
@@ -24,6 +26,9 @@ class UserCreatePage extends React.Component {
   }
 
   render() {
+    if(this.props.created) {
+      return <Redirect to='/dashboard/users' />
+    }
     return (
       <div className="CreateUserPage">
         <div className="row">
@@ -140,5 +145,12 @@ class UserCreatePage extends React.Component {
   }
 }
 
-const ConnectedUserCreatePage = connect()(UserCreatePage);
+function mapStateToProps(state) {
+  const { created } = state.users;
+  return {
+    created
+  }
+}
+
+const ConnectedUserCreatePage = connect(mapStateToProps)(UserCreatePage);
 export { ConnectedUserCreatePage as UserCreatePage };
