@@ -12,30 +12,35 @@ class Statistics extends React.Component {
   render() {
     const { statistics } = this.props;
     return (
-      <table className="table">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Payment Date</th>
-            <th scope="col">Payment Amount</th>
-            <th scope="col">Submitted By</th>
-            <th scope="col">Submitted For</th>
-            <th scope="col">Submitter Note</th>
-          </tr>
-        </thead>
-        <tbody>
-          { statistics && statistics.map((data, i) => 
-            <tr key={data._id}>
-              <th scope="row">{i+1}</th>
-              <td>{getDateFromString(data.PaymentDate)}</td>
-              <td>{getBDTCurrency(data.PaymentAmount)}</td>
-              <td>{data.SubmittedBy}</td>
-              <td>{data.SubmittedFor}</td>
-              <td>{data.SubmitterNote}</td>
+      <div>
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 className="h2">Transaction History</h1>
+        </div>
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Payment Date</th>
+              <th scope="col">Payment Amount</th>
+              <th scope="col">Submitted By</th>
+              <th scope="col">Submitted For</th>
+              <th scope="col">Submitter Note</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            { statistics && statistics.map((data, i) => 
+              <tr key={data._id}>
+                <th scope="row">{i+1}</th>
+                <td>{getDateFromString(data.PaymentDate)}</td>
+                <td>{getBDTCurrency(data.PaymentAmount)}</td>
+                <td>{data.SubmittedBy}</td>
+                <td>{data.SubmittedFor}</td>
+                <td>{data.SubmitterNote}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

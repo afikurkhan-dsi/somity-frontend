@@ -23,6 +23,7 @@ function login(username, password) {
     .then(user => {
       if(user && user.token) {
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('username', JSON.stringify(username));
       }
       return user;
     });
@@ -31,6 +32,7 @@ function login(username, password) {
 
 function logout() {
   localStorage.removeItem('user');
+  localStorage.removeItem('username');
 }
 
 

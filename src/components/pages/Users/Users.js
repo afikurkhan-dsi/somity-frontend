@@ -6,6 +6,8 @@ import swal from 'sweetalert';
 import { userActions } from '../../../actions';
 import { Spinner } from '../../common';
 
+import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
+
 class Users extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +43,15 @@ class Users extends React.Component {
     return (
       <div>
         {users.loading ? <Spinner color={'#000'} /> : null}
+        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 className="h2">Users</h1>
+          <Link
+            className="btn btn-primary"
+            to="/dashboard/users/create">
+            <FaPlusCircle /> New User
+          </Link>
+        </div>
+       
         {users.items &&
           <table className="table table-striped">
             <thead className="thead-dark">
@@ -73,7 +84,7 @@ class Users extends React.Component {
                         className="btn btn-outline-primary btn-sm">Pay</Link>
                     </td>
                 </tr>
-                )}
+              )}
             </tbody>
           </table>
         }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import swal from 'sweetalert';
 
 import { userActions } from '../../../actions';
 import { Users } from '../Users';
@@ -9,6 +8,7 @@ import { UserCreatePage } from '../UserCreatePage';
 import { Profile } from '../Profile';
 import { Payments } from '../Payments';
 import { SidebarNavigation } from './Navigation';
+import { WelcomePage } from './../WelcomePage';
 import * as styles from './Dashboard.css';
 
 import FaHome from 'react-icons/lib/fa/home';
@@ -26,9 +26,6 @@ class Dashboard extends React.Component {
 
   render() {
     const { match } = this.props;
-    if(this.props.created) {
-      swal("Good job!", "User Created Successfully!", "success");
-    }
     return (
       <div>
         {localStorage.getItem('user') ? null : <Redirect to='/login' /> }
@@ -52,10 +49,8 @@ class Dashboard extends React.Component {
             <SidebarNavigation match={match}/>
 
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 className="h2">Dashboard</h1>
-              </div>
               <Switch>
+                <Route exact path={`${match.url}`} component={WelcomePage} />
                 <Route exact path={`${match.url}/users`} component={Users} />
                 { this.props.created ?
                   <Redirect to={`${match.url}/users`} /> :
@@ -74,11 +69,9 @@ class Dashboard extends React.Component {
 
 function mapStateToProps(state) {
   const { user, username } = state.authentication;
-  const { created } = state.users;
   return {
     user,
     username,
-    created
   }
 }
 
