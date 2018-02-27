@@ -15,6 +15,15 @@ export function payment(state={}, action) {
       return {
         error: action.error
       };
+    case paymentConstants.PAY_SUCCESS:
+      return {
+        paid: true,
+        data: action.data
+      }
+    case paymentConstants.PAY_FAILURE:
+      return {
+        error: action.error
+      }
     default:
       return state;
 

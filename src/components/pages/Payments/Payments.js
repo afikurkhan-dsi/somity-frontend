@@ -1,31 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
-import { paymentActions } from '../../../actions';
 import { Statistics } from './Statistics';
+import { PayForm } from './PayForm';
 
 class Payments extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(paymentActions.getStatistics('', ''));
-  }
-
   render() {
-    const { statistics } = this.props;
-
+    const { match } = this.props;
+  
     return (
       <div className="Payment">
-        <Statistics statistics={statistics} />
+        <Switch>
+          <Route exact path={`${match.url}`} component={Statistics} />
+          <Route path={`${match.url}/users/:UserId`} component={PayForm} />
+        </Switch>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  const { statistics } = state.payment
-  return {
-    statistics
-  }
-}
-
-const connectedPayments = connect(mapStateToProps)(Payments);
-export { connectedPayments as Payments };
+export { Payments };

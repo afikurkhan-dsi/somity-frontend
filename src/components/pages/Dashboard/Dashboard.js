@@ -61,7 +61,7 @@ class Dashboard extends React.Component {
                   <Redirect to={`${match.url}/users`} /> :
                   <Route exact path={`${match.url}/users/create`} component={UserCreatePage} />
                 }
-                <Route path={`${match.url}/users/:UserId`} component={Profile} />
+                <Route exact path={`${match.url}/users/:UserId`} component={Profile} />
                 <Route path={`${match.url}/payments`} component={Payments} />
               </Switch>
             </main>

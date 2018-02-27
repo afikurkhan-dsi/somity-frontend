@@ -51,24 +51,28 @@ class Users extends React.Component {
                 <th scope="col">Email</th>
                 <th scope="col">Phone Number</th>
                 <th scope="col">Address</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.items.map((user, index) =>
-                    <tr key={user._id}>
-                        <td><Link to={`${this.props.match.url}/${user._id}`}>{user.Username}</Link></td>
-                        <td>{user.FirstName}</td>
-                        <td>{user.LastName}</td>
-                        <td>{user.Email}</td>
-                        <td>{user.Phone}</td>
-                        <td>{user.Address}</td>
-                        <td>
-                          <button
-                            onClick={() => deleteUser(user)} 
-                            className="btn btn-outline-danger btn-sm">Delete</button>
-                        </td>
-                    </tr>
+                <tr key={user._id}>
+                    <td><Link to={`${this.props.match.url}/${user._id}`}>{user.Username}</Link></td>
+                    <td>{user.FirstName}</td>
+                    <td>{user.LastName}</td>
+                    <td>{user.Email}</td>
+                    <td>{user.Phone}</td>
+                    <td>{user.Address}</td>
+                    <td style={{whiteSpace: 'nowrap'}}>
+                      <button
+                        onClick={() => deleteUser(user)} 
+                        className="btn btn-outline-danger btn-sm">Delete</button>
+                      &nbsp;&nbsp;
+                      <Link
+                        to={`/dashboard/payments/users/${user._id}`}
+                        className="btn btn-outline-primary btn-sm">Pay</Link>
+                    </td>
+                </tr>
                 )}
             </tbody>
           </table>
