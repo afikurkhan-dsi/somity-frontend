@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Table } from 'semantic-ui-react'
 
 import { getDateFromString, getBDTCurrency } from './../../../common';
 import { paymentActions } from './../../../../actions';
@@ -16,30 +17,30 @@ class Statistics extends React.Component {
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 className="h2">Transaction History</h1>
         </div>
-        <table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Payment Date</th>
-              <th scope="col">Payment Amount</th>
-              <th scope="col">Submitted By</th>
-              <th scope="col">Submitted For</th>
-              <th scope="col">Submitter Note</th>
-            </tr>
-          </thead>
-          <tbody>
-            { statistics && statistics.map((data, i) => 
-              <tr key={data._id}>
-                <th scope="row">{i+1}</th>
-                <td>{getDateFromString(data.PaymentDate)}</td>
-                <td>{getBDTCurrency(data.PaymentAmount)}</td>
-                <td>{data.SubmittedBy}</td>
-                <td>{data.SubmittedFor}</td>
-                <td>{data.SubmitterNote}</td>
-              </tr>
+        <Table celled striped>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>#</Table.HeaderCell>
+              <Table.HeaderCell>Payment Date</Table.HeaderCell>
+              <Table.HeaderCell>Payment Amount</Table.HeaderCell>
+              <Table.HeaderCell>Submitted By</Table.HeaderCell>
+              <Table.HeaderCell>Submitted For</Table.HeaderCell>
+              <Table.HeaderCell>Submitter Note</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {statistics && statistics.map((data, i) => 
+              <Table.Row key={data._id}>
+                <Table.Cell>{i+1}</Table.Cell>
+                <Table.Cell>{getDateFromString(data.PaymentDate)}</Table.Cell>
+                <Table.Cell>{getBDTCurrency(data.PaymentAmount)}</Table.Cell>
+                <Table.Cell>{data.SubmittedBy}</Table.Cell>
+                <Table.Cell>{data.SubmittedFor}</Table.Cell>
+                <Table.Cell>{data.SubmitterNote}</Table.Cell>
+              </Table.Row>
             )}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table>
       </div>
     );
   }
