@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../../../actions';
 import { Users } from '../Users';
-import { UserCreatePage } from '../UserCreatePage';
 import { Profile } from '../Profile';
 import { Payments } from '../Payments';
 import { SidebarNavigation } from './Navigation';
@@ -52,10 +51,6 @@ class Dashboard extends React.Component {
               <Switch>
                 <Route exact path={`${match.url}`} component={WelcomePage} />
                 <Route exact path={`${match.url}/users`} component={Users} />
-                { this.props.created ?
-                  <Redirect to={`${match.url}/users`} /> :
-                  <Route exact path={`${match.url}/users/create`} component={UserCreatePage} />
-                }
                 <Route exact path={`${match.url}/users/:UserId`} component={Profile} />
                 <Route path={`${match.url}/payments`} component={Payments} />
               </Switch>

@@ -5,17 +5,31 @@ import swal from 'sweetalert';
 
 import { userActions } from '../../../actions';
 import { Spinner } from '../../common';
+import { Modal } from './../../common/Modal';
+import { UserForm } from './../UserForm';
 
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 
 class Users extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false
+    }
     this.deleteUser = this.deleteUser.bind(this);
   }
 
   componentWillMount() {
     this.props.dispatch(userActions.getAll());
+  }
+
+  toggleModal = () => {
+    this.setState((state, props) => ({showModal: !state.showModal}))
+  }
+
+  createUser = (Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
+    this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
+    this.toggleModal();
   }
 
   deleteUser(user) {
@@ -38,18 +52,22 @@ class Users extends React.Component {
 
   render() {
     const { users } = this.props;
-    const { deleteUser } = this;
-
+    const { createUser, deleteUser, toggleModal } = this;
+    const { showModal } = this.state;
+    
     return (
       <div>
         {users.loading ? <Spinner color={'#000'} /> : null}
+        <Modal show={showModal} onClose={toggleModal}>
+          <UserForm onCreate={createUser}/>
+        </Modal>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 className="h2">Users</h1>
-          <Link
+          <button
             className="btn btn-primary"
-            to="/dashboard/users/create">
+            onClick={ toggleModal }>
             <FaPlusCircle /> New User
-          </Link>
+          </button>
         </div>
        
         {users.items &&

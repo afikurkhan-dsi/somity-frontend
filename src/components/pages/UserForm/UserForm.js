@@ -1,38 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
-import { userActions } from '../../../actions';
-
-class UserCreatePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(e) {
+class UserForm extends React.Component {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const Username = this.refs.Username.value;
-    const FirstName = this.refs.FirstName.value;
-    const LastName = this.refs.LastName.value;
-    const Email = this.refs.Email.value;
-    const Phone = this.refs.Phone.value;
-    const Address = this.refs.Address.value;
-    const Password = this.refs.Password.value;
-    const IsActive = this.refs.IsActive.checked;
-    const Scope = this.refs.Scope.value;
-
-    this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
+    const Username = this.refs.Username.value,
+          FirstName = this.refs.FirstName.value,
+          LastName = this.refs.LastName.value,
+          Email = this.refs.Email.value,
+          Phone = this.refs.Phone.value,
+          Address = this.refs.Address.value,
+          Password = this.refs.Password.value,
+          IsActive = this.refs.IsActive.checked,
+          Scope = this.refs.Scope.value;
+    this.props.onCreate(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope);
   }
 
   render() {
-    if(this.props.created) {
-      return <Redirect to='/dashboard/users' />
-    }
     return (
       <div className="CreateUserPage">
         <div className="row">
-          <div className="col-6">
+          <div className="col-12">
             <h3>Create New User</h3>
             <hr/>
             <form onSubmit={this.handleSubmit}>
@@ -145,12 +133,12 @@ class UserCreatePage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { created } = state.users;
-  return {
-    created
-  }
+UserForm.propTypes = {
+  onCreate: PropTypes.func
+};
+
+UserForm.defaultProps = {
+  onCreate: f => f
 }
 
-const ConnectedUserCreatePage = connect(mapStateToProps)(UserCreatePage);
-export { ConnectedUserCreatePage as UserCreatePage };
+export { UserForm };

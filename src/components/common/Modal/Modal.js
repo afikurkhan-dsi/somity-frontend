@@ -24,10 +24,11 @@ class Modal extends React.Component {
       backgroundColor: '#fff',
       borderRadius: 5,
       maxWidth: 500,
-      minHeight: 300,
+      height: '100%',
       margin: '0 auto',
       padding: 30,
-      position: 'relative'
+      position: 'relative',
+      overflowY: 'auto'
     };
 
     const ModalCloseBtn = {
