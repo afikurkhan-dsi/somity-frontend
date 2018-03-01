@@ -18,11 +18,9 @@ class UserForm extends React.Component {
 
   render() {
     return (
-      <div className="CreateUserPage">
+      <div className="UserForm">
         <div className="row">
           <div className="col-12">
-            <h3>Create New User</h3>
-            <hr/>
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <label htmlFor="Username">Username</label>

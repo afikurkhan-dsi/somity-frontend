@@ -23,13 +23,26 @@ class Modal extends React.Component {
     const modalStyle = {
       backgroundColor: '#fff',
       borderRadius: 5,
-      maxWidth: 500,
-      height: '100%',
+      maxWidth: 600,
+      maxHeight: '100%',
       margin: '0 auto',
-      padding: 30,
       position: 'relative',
-      overflowY: 'auto'
     };
+
+    const modalBody = {
+      width: '100%',
+      height: 500,
+      paddingLeft: 30,
+      paddingRight: 30,
+      overflowX: 'hidden',
+      overflowY: 'scroll'
+    }
+
+    const modalHeader = {
+      paddingLeft: 30,
+      paddingRigt: 30,
+      paddingTop: 15
+    }
 
     const ModalCloseBtn = {
       position: 'absolute',
@@ -47,12 +60,15 @@ class Modal extends React.Component {
     return (
       <div style={backdropStyle}>
         <div style={modalStyle}>
-          {this.props.children}
-
-          <div className="footer">
+          <div style={modalHeader}>
+            <h4>Create New User</h4>
             <span onClick={this.props.onClose} style={ModalCloseBtn}>
               x
             </span>
+          </div>
+          <hr/>
+          <div style={modalBody}>
+            {this.props.children}
           </div>
         </div>
       </div>
