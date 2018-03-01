@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Divider, Button, Grid, Dimmer, Loader, Modal } from 'semantic-ui-react';
 import swal from 'sweetalert';
 
 import { userActions } from '../../../actions';
-import { Spinner } from '../../common';
-import { Modal } from './../../common/Modal';
 import { UserForm } from './../UserForm';
 import { UsersList } from './UsersList';
 
@@ -13,9 +12,6 @@ import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 class Users extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false
-    }
     this.deleteUser = this.deleteUser.bind(this);
   }
 
@@ -23,13 +19,12 @@ class Users extends React.Component {
     this.props.dispatch(userActions.getAll());
   }
 
-  toggleModal = () => {
-    this.setState((state, props) => ({showModal: !state.showModal}))
-  }
-
   createUser = (Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
     this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
-    this.toggleModal();
+  }
+
+  updateUser = (Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
+    console.log('update user');
   }
 
   deleteUser(user) {
@@ -52,27 +47,36 @@ class Users extends React.Component {
 
   render() {
     const { users } = this.props;
-    const { createUser, deleteUser, toggleModal } = this;
-    const { showModal } = this.state;
+    const { createUser, deleteUser, updateUser } = this;
     
     return (
-      <div>
-        {users.loading ? <Spinner color={'#000'} /> : null}
-        <Modal show={showModal} onClose={toggleModal}>
-          <UserForm onCreate={createUser}/>
-        </Modal>
-        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 className="h2">Users</h1>
-          <button
-            className="btn btn-primary"
-            onClick={ toggleModal }>
-            <FaPlusCircle /> New User
-          </button>
-        </div>
-        <UsersList 
-          users={users.items}
-          onDelete={deleteUser} />
-      </div>
+      <Grid divided='vertically' padded='horizontally'>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            {users.loading ?
+              <Dimmer active inverted>
+                <Loader inverted>Loading</Loader>
+              </Dimmer> : 
+              null
+            }
+            <Grid padded='horizontally'>
+              <Grid.Row>
+                <h1 className="h2">Users</h1>
+                <Modal trigger={<Button><FaPlusCircle /> New User</Button>}>
+                  <Modal.Content>
+                    <UserForm onSubmitForm={createUser}/>
+                  </Modal.Content>
+                </Modal>
+              </Grid.Row>
+            </Grid>
+            <Divider />
+            <UsersList
+              users={users.items}
+              onDelete={deleteUser}
+              onUpdate={updateUser} />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

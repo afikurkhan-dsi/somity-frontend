@@ -13,10 +13,12 @@ class UserForm extends React.Component {
           Password = this.refs.Password.value,
           IsActive = this.refs.IsActive.checked,
           Scope = this.refs.Scope.value;
-    this.props.onCreate(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope);
+    this.props.onSubmitForm(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope);
   }
 
   render() {
+    const { _id, Username, FirstName, LastName, Email, Phone, Address, Scope } = this.props;
+    const submitBtnName = _id ? 'Update User' : 'Create User';
     return (
       <div className="UserForm">
         <div className="row">
@@ -30,6 +32,7 @@ class UserForm extends React.Component {
                   id="Username"
                   ref="Username"  
                   placeholder="Enter Username"
+                  defaultValue={Username}
                   required/>
               </div>
 
@@ -41,6 +44,7 @@ class UserForm extends React.Component {
                   id="FirstName"
                   ref="FirstName"  
                   placeholder="Enter FirstName"
+                  defaultValue={FirstName}
                   required/>
               </div>
               
@@ -50,8 +54,9 @@ class UserForm extends React.Component {
                   type="text" 
                   className="form-control" 
                   id="LastName"
-                  ref="LastName"  
+                  ref="LastName"
                   placeholder="Enter LastName"
+                  defaultValue={LastName}
                   required/>
               </div>
 
@@ -62,8 +67,9 @@ class UserForm extends React.Component {
                   className="form-control" 
                   id="Email" 
                   ref="Email"
-                  aria-describedby="emailHelp" 
+                  aria-describedby="emailHelp"
                   placeholder="Enter email"
+                  defaultValue={Email}
                   required/>
               </div>
 
@@ -75,6 +81,7 @@ class UserForm extends React.Component {
                   id="Phone"
                   ref="Phone"  
                   placeholder="Enter Phone"
+                  defaultValue={Phone}
                   required/>
               </div>
 
@@ -85,7 +92,8 @@ class UserForm extends React.Component {
                   ref="Address"
                   id="Address"
                   cols="10"
-                  rows="3"></textarea>
+                  rows="3"
+                  defaultValue={Address}></textarea>
               </div>
 
               <div className="form-group">
@@ -101,7 +109,7 @@ class UserForm extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="Scope">Select Type</label>
-                <select name="Scope" id="Scope" ref="Scope" className="form-control">
+                <select name="Scope" id="Scope" ref="Scope" defaultValue={Scope}>
                   <option value="admin">Admin</option>
                   <option value="member">Member</option>
                 </select>
@@ -120,7 +128,7 @@ class UserForm extends React.Component {
                 <button 
                   type="submit" 
                   className="btn btn-primary">
-                  Submit
+                  { submitBtnName }
                 </button>
               </div>
             </form>
@@ -132,11 +140,11 @@ class UserForm extends React.Component {
 }
 
 UserForm.propTypes = {
-  onCreate: PropTypes.func
+  onSubmitForm: PropTypes.func
 };
 
 UserForm.defaultProps = {
-  onCreate: f => f
+  onSubmitForm: f => f
 }
 
 export { UserForm };

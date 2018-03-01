@@ -1,47 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Table } from 'semantic-ui-react';
+import { UsersListRow } from './UsersListRow';
 
-const UsersList = ({ users=[], onDelete=f=>f }) => (
-  <table className="table table-striped">
-    <thead className="thead-dark">
-      <tr>
-        <th scope="col">Username</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone Number</th>
-        <th scope="col">Address</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
+const UsersList = ({ users=[], onDelete=f=>f, onUpdate=f=>f }) => (
+  <Table celled striped>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>Username</Table.HeaderCell>
+        <Table.HeaderCell>First Name</Table.HeaderCell>
+        <Table.HeaderCell>Last Name</Table.HeaderCell>
+        <Table.HeaderCell>Email</Table.HeaderCell>
+        <Table.HeaderCell>Phone Number</Table.HeaderCell>
+        <Table.HeaderCell>Address</Table.HeaderCell>
+        <Table.HeaderCell>Actions</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
       {users.map((user, index) =>
-        <tr key={user._id}>
-            <td><Link to={`/dashboard/users/${user._id}`}>{user.Username}</Link></td>
-            <td>{user.FirstName}</td>
-            <td>{user.LastName}</td>
-            <td>{user.Email}</td>
-            <td>{user.Phone}</td>
-            <td>{user.Address}</td>
-            <td style={{whiteSpace: 'nowrap'}}>
-              <button
-                onClick={() => onDelete(user)} 
-                className="btn btn-outline-danger btn-sm">Delete</button>
-              &nbsp;&nbsp;
-              <Link
-                to={`/dashboard/payments/users/${user._id}`}
-                className="btn btn-outline-primary btn-sm">Pay</Link>
-            </td>
-        </tr>
+        <UsersListRow key={`user-${user._id}`} user={user} onDelete={onDelete} onUpdate={onUpdate}/>
       )}
-    </tbody>
-  </table>
+    </Table.Body>
+  </Table>
 );
 
 UsersList.propTypes = {
   users: PropTypes.array,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  onUpdate: PropTypes.func
 };
 
 export { UsersList };

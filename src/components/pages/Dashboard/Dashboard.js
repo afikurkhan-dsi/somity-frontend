@@ -40,9 +40,7 @@ class Dashboard extends React.Component {
                 <Dropdown.Menu>
                   <Dropdown.Item>Profile</Dropdown.Item>
                   <Dropdown.Item>
-                    <li className="nav-item text-nowrap">
-                      <Link to="/login" onClick={this.logoutHandle}>Sign out</Link>
-                    </li>
+                    <Link to="/login" onClick={this.logoutHandle}>Sign out</Link>
                   </Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown>
