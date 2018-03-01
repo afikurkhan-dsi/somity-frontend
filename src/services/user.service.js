@@ -8,7 +8,8 @@ export const userService = {
   getAll,
   get,
   deleteUser,
-  create
+  create,
+  update
 };
 
 function login(username, password) {
@@ -83,5 +84,24 @@ function create(Username, FirstName, LastName, Email, Phone, Address, Password, 
   };
 
   return fetch(URL + '/users', requestOptions)
+    .then(response => handler(response));
+}
+
+function update(UserId, FirstName, LastName, Email, Phone, Address, IsActive, Scope) {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: authHeader(),
+    body: JSON.stringify({
+      "FirstName": FirstName,
+      "LastName": LastName,
+      "IsActive": IsActive,
+      "Email": Email,
+      "Phone": Phone,
+      "Address": Address,
+      "Scope": Scope
+    })
+  };
+
+  return fetch(`${URL}/users/${UserId}`, requestOptions)
     .then(response => handler(response));
 }

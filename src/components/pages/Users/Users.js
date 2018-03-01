@@ -10,24 +10,19 @@ import { UsersList } from './UsersList';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 
 class Users extends React.Component {
-  constructor(props) {
-    super(props);
-    this.deleteUser = this.deleteUser.bind(this);
-  }
-
   componentWillMount() {
     this.props.dispatch(userActions.getAll());
   }
 
-  createUser = (Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
+  createUser = (UserId, Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
     this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
   }
 
-  updateUser = (Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
-    console.log('update user');
+  updateUser = (UserId, Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
+    this.props.dispatch(userActions.updateUser(UserId, FirstName, LastName, Email, Phone, Address, IsActive, Scope));
   }
 
-  deleteUser(user) {
+  deleteUser = (user) => {
     swal({
       title: "Are you sure?",
       text: `${user.FirstName} ${user.LastName} will be deleted permanently`,

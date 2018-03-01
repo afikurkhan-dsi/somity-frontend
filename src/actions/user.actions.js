@@ -9,7 +9,8 @@ export const userActions = {
   getAll,
   get,
   create,
-  deleteUser
+  deleteUser,
+  updateUser
 };
 
 function login(username, password) {
@@ -96,4 +97,20 @@ function deleteUser(id) {
 
   function request() { return { type: userConstants.DELETE_REQUEST } }
   function success(response) { return { type: userConstants.DELETE_SUCCESS, response } }
+}
+
+
+function updateUser(UserId, FirstName, LastName, Email, Phone, Address, IsActive, Scope) {
+  return dispatch => {
+    dispatch(request());
+
+    userService.update(UserId, FirstName, LastName, Email, Phone, Address, IsActive, Scope)
+      .then(
+        response => dispatch(success()),
+        error => handleError(dispatch, userConstants.UPDATE_FAILURE, error)
+      );
+  };
+
+  function request() { return { type: userConstants.UPDATE_REQUEST } }
+  function success(response) { return { type: userConstants.UPDATE_SUCCESS, response } }
 }

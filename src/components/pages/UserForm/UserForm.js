@@ -13,7 +13,7 @@ class UserForm extends React.Component {
           Password = this.refs.Password.value,
           IsActive = this.refs.IsActive.checked,
           Scope = this.refs.Scope.value;
-    this.props.onSubmitForm(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope);
+    this.props.onSubmitForm(this.props._id, Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope);
   }
 
   render() {
