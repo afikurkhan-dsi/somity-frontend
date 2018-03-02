@@ -9,7 +9,8 @@ export const userService = {
   get,
   deleteUser,
   create,
-  update
+  update,
+  getByUsername
 };
 
 function login(username, password) {
@@ -44,6 +45,16 @@ function getAll() {
   };
 
   return fetch(URL + '/users', requestOptions)
+    .then(response => handler(response));
+}
+
+function getByUsername(Username) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  };
+
+  return fetch(`${URL}/users?Username=${Username}`, requestOptions)
     .then(response => handler(response));
 }
 

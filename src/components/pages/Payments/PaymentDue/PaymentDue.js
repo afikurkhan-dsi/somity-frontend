@@ -10,7 +10,6 @@ class PaymentDue extends React.Component {
   }
   render() {
     const { dues } = this.props;
-    console.log(dues);
     return (
       <div>
         <h2>Payment Dues</h2>

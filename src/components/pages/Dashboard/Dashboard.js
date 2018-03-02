@@ -34,15 +34,15 @@ class Dashboard extends React.Component {
               match={match}/>
 
             <main className={styles.Main}>
-              <Menu size='small'>
+              <Menu size='small' pointing secondary style={{ borderBottomWidth: '1px'}}>
                 <Menu.Menu position='right'>
-                <Dropdown item text='Admin'>
-                <Dropdown.Menu>
-                  <Dropdown.Item>Profile</Dropdown.Item>
-                  <Dropdown.Item>
-                    <Link to="/login" onClick={this.logoutHandle}>Sign out</Link>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
+                <Dropdown item text='Admin' pointing>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>Profile</Dropdown.Item>
+                    <Dropdown.Item>
+                      <Link to="/login" onClick={this.logoutHandle}>Sign out</Link>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
                 </Dropdown>
                 </Menu.Menu>
               </Menu>

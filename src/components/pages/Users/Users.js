@@ -61,26 +61,25 @@ class Users extends React.Component {
               </Dimmer> : 
               null
             }
-            <Grid padded='horizontally'>
-              <Grid.Row>
-                <h1 className="h2">Users</h1>
-                <Modal 
-                    open={this.state.modalOpen}
-                    onClose={this.handleClose} 
-                    size='tiny' 
-                    trigger={
-                      <Button onClick={this.handleOpen}>
-                        <FaPlusCircle /> 
-                        New User
-                      </Button>
-                    }
-                >
-                  <Modal.Content>
-                    <UserForm onSubmitForm={createUser}/>
-                  </Modal.Content>
-                </Modal>
-              </Grid.Row>
-            </Grid>
+            <h1 className="h2" style={{display: 'inline'}}>Users</h1>
+
+            <Modal 
+                open={this.state.modalOpen}
+                onClose={this.handleClose} 
+                size='tiny' 
+                trigger={
+                  <Button
+                    primary
+                    floated='right' 
+                    onClick={this.handleOpen}>
+                    <FaPlusCircle /> New User
+                  </Button>
+                }
+            >
+              <Modal.Content>
+                <UserForm onSubmitForm={createUser}/>
+              </Modal.Content>
+            </Modal>
             <Divider />
             <UsersList
               users={users.items}

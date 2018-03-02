@@ -115,7 +115,8 @@ class UserForm extends React.Component {
                 </div>
               </Form.Field>
               <Form.Field>
-                <Button 
+                <Button
+                  primary 
                   type="submit"
                 >
                   { submitBtnName }

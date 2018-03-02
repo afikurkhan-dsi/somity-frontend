@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Table } from 'semantic-ui-react'
+import { Table, Divider } from 'semantic-ui-react'
 
 import { getDateFromString, getBDTCurrency } from './../../../common';
 import { paymentActions } from './../../../../actions';
@@ -14,8 +14,9 @@ class Statistics extends React.Component {
     const { statistics } = this.props;
     return (
       <div>
-        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 className="h2">Transaction History</h1>
+        <div>
+          <h2>Transaction History</h2>
+          <Divider />
         </div>
         <Table celled striped>
           <Table.Header>
