@@ -4,7 +4,8 @@ import { handleError } from './handler.actions';
 
 export const paymentActions = {
   getStatistics,
-  pay
+  pay,
+  getPaymentDue
 }
 
 function getStatistics(FromDate, ToDate) {
@@ -23,7 +24,6 @@ function getStatistics(FromDate, ToDate) {
 }
 
 function pay(UserId, PaymentAmount, PaymentDate, SubmittedBy, SubmitterNote) {
-  console.log(UserId, PaymentAmount, PaymentDate, SubmittedBy, SubmitterNote)
   return dispatch => {
     dispatch(request());
 
@@ -36,4 +36,17 @@ function pay(UserId, PaymentAmount, PaymentDate, SubmittedBy, SubmitterNote) {
 
   function request() { return { type: paymentConstants.PAY_REQUEST } }
   function success(data) { return { type: paymentConstants.PAY_SUCCESS, data } }
+}
+
+function getPaymentDue(Username, FirstName, LastName, Email, Phone) {
+  return dispatch => {
+    dispatch (request());
+    paymentService.getPaymentDue(Username, FirstName, LastName, Email, Phone)
+      .then(
+        data => dispatch(success(data)),
+        error => handleError(dispatch, paymentConstants)
+      );
+  }
+  function request() { return { type: paymentConstants.REQUEST_PAYMENT_DUE } }
+  function success(data) { return { type: paymentConstants.SUCCESS_PAYMENT_DUE, data } }
 }

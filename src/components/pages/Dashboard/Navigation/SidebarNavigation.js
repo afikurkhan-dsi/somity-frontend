@@ -32,10 +32,21 @@ export const SidebarNavigation = ({match}) => (
   
       <li>
         <NavLink
+          exact
           className={styles.NavLink}
           activeClassName={styles.active}
           to={`${match.url}/payments`}>
           <FaBarChart /> Transaction History
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          exact
+          className={styles.NavLink}
+          activeClassName={styles.active}
+          to={`${match.url}/payments/payment_dues`}>
+          <FaBarChart /> Payment Dues
         </NavLink>
       </li>
     </ul>

@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react';
 
 import { Statistics } from './Statistics';
 import { PayForm } from './PayForm';
+import { PaymentDue } from './PaymentDue';
 
 class Payments extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class Payments extends React.Component {
             <div className="Payment">
               <Switch>
                 <Route exact path={`${match.url}`} component={Statistics} />
+                <Route exact path={`${match.url}/payment_dues`} component={PaymentDue} />
                 <Route path={`${match.url}/users/:UserId`} component={PayForm} />
               </Switch>
             </div>

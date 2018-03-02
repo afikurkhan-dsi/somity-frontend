@@ -30,6 +30,25 @@ export function payment(state={}, action) {
         ...state,
         error: action.error
       }
+    case paymentConstants.REQUEST_PAYMENT_DUE:
+      return {
+        ...state,
+        loading: true
+      }
+    case paymentConstants.SUCCESS_PAYMENT_DUE:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        dues: action.data    
+      }
+    case paymentConstants.FAILURE_PAYMENT_DUE:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      }
     default:
       return state;
 
