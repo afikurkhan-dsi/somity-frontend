@@ -10,12 +10,19 @@ import { UsersList } from './UsersList';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 
 class Users extends React.Component {
+  state = { modalOpen: false }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
+
   componentWillMount() {
     this.props.dispatch(userActions.getAll());
   }
 
   createUser = (UserId, Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
     this.props.dispatch(userActions.create(Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope));
+    this.handleClose();
   }
 
   updateUser = (UserId, Username, FirstName, LastName, Email, Phone, Address, Password, IsActive, Scope) => {
@@ -57,7 +64,17 @@ class Users extends React.Component {
             <Grid padded='horizontally'>
               <Grid.Row>
                 <h1 className="h2">Users</h1>
-                <Modal trigger={<Button><FaPlusCircle /> New User</Button>}>
+                <Modal 
+                    open={this.state.modalOpen}
+                    onClose={this.handleClose} 
+                    size='tiny' 
+                    trigger={
+                      <Button onClick={this.handleOpen}>
+                        <FaPlusCircle /> 
+                        New User
+                      </Button>
+                    }
+                >
                   <Modal.Content>
                     <UserForm onSubmitForm={createUser}/>
                   </Modal.Content>

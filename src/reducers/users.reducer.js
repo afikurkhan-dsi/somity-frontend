@@ -45,7 +45,6 @@ export function users(state = {}, action) {
         ...state,
         deleting: false,
         deleted: true,
-        items: action.users
       }
     case userConstants.DELETE_FAILURE:
       return {

@@ -1,11 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Button, Modal } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 import FaTrash from 'react-icons/lib/fa/trash';
-import FaPencil from 'react-icons/lib/fa/pencil';
-
-import { UserForm } from './../../UserForm'
 
 const UsersListRow = ({ user={}, onDelete=f=>f, onUpdate=f=>f }) => (
   <Table.Row>
@@ -31,25 +28,6 @@ const UsersListRow = ({ user={}, onDelete=f=>f, onUpdate=f=>f }) => (
           Delete
         </Button.Content>
       </Button>
-      
-      <Modal trigger={
-        <Button
-          animated
-          secondary
-          size='mini'
-        >
-          <Button.Content visible>
-            <FaPencil />
-          </Button.Content>
-          <Button.Content hidden>
-            Edit
-          </Button.Content>
-        </Button>
-      }>
-        <Modal.Content>
-          <UserForm {...user} onSubmitForm={onUpdate}/>
-        </Modal.Content>
-      </Modal>
 
       <Link
         to={`/dashboard/payments/users/${user._id}`}
