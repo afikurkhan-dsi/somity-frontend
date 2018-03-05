@@ -61,6 +61,7 @@ export function users(state = {}, action) {
         ...state,
         creating: false,
         created: true,
+        items: [...state.items, Object.assign({}, action.user)],
         user: action.user
       }
     case userConstants.CREATE_FAILURE:
