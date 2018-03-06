@@ -14,7 +14,7 @@ const UsersListRow = ({ user={}, onDelete=f=>f, onUpdate=f=>f }) => (
     <Table.Cell>{user.Email}</Table.Cell>
     <Table.Cell>{user.Phone}</Table.Cell>
     <Table.Cell>{user.Address}</Table.Cell>
-    <Table.Cell>
+    <Table.Cell style={{whiteSpace: 'nowrap'}}>
       <Button
         animated
         negative

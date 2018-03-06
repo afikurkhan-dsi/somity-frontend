@@ -90,13 +90,13 @@ function deleteUser(id) {
 
     userService.deleteUser(id)
       .then(
-        response => dispatch(success()),
+        response => dispatch(success(id)),
         error => handleError(dispatch, userConstants.GETALL_FAILURE, error)
       );
   };
 
   function request() { return { type: userConstants.DELETE_REQUEST } }
-  function success(response) { return { type: userConstants.DELETE_SUCCESS, response } }
+  function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
 }
 
 

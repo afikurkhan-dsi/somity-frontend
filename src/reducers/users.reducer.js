@@ -41,10 +41,12 @@ export function users(state = {}, action) {
         deleting: true
       }
     case userConstants.DELETE_SUCCESS:
+      const users = state.items.filter(user => user._id !== action.id);
       return {
         ...state,
         deleting: false,
         deleted: true,
+        items: users
       }
     case userConstants.DELETE_FAILURE:
       return {
