@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Grid, Image, Divider } from 'semantic-ui-react'
 
 import { userActions } from '../../../actions';
 
@@ -10,28 +10,28 @@ class Profile extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <h3 className="text-uppercase text-center">Profile</h3>
-            <hr/>
+      <Grid padded='horizontally'>
+        <Grid.Row>
+          <Grid.Column>
+            <h2>Profile</h2>
+            <Divider />
+
             { this.props.user &&
             <div className="userInfo">
-              <img src="http://via.placeholder.com/150x150" className="img-thumbnail rounded-circle mx-auto d-block" alt=""/>
+              <Image src="http://via.placeholder.com/150x150" circular/>
               <div className="text-center">
                 <h3 style={{fontWeight: '700'}}>{this.props.user.FirstName} {this.props.user.LastName}</h3>
                 <address>
                   {this.props.user.Address}
                 </address>
                 <p>{this.props.user.Phone} &#9675; {this.props.user.Email}</p>
-                <Link style={{textTransform: 'uppercase'}} to={`/dashboard/${this.props.user._id}/edit`}>Edit profile</Link>
               </div>
             </div>
             }
-          </div>
-        </div>
-      </div>
-    )
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
   }
 }
 
