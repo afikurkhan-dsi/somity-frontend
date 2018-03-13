@@ -1,5 +1,6 @@
 import { authHeader } from '../helpers';
 import { handler } from './handler.service';
+import { encodeData } from './../components/common/utils';
 import URL from './url';
 
 export const paymentService = {
@@ -39,13 +40,23 @@ function pay(UserId, PaymentAmount, PaymentDate, SubmittedBy, SubmitterNote) {
 }
 
 
-function getPaymentDue(Username='', FirstName='', LastName, Email, Phone) {
+function getPaymentDue(Username, FirstName, LastName, Email, Phone) {
+  let newUrl = `${URL}/payment_dues?`
+  const obj = {};
+  if(Username) obj['Username'] = Username;
+  if(FirstName) obj['FirstName'] = FirstName;
+  if(LastName) obj['LastName'] = LastName;
+  if(Email) obj['Email'] = Email;
+  if(Phone) obj['Phone'] = Phone;
+
+  newUrl += encodeData(obj);
+
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
   }
-
-  return fetch(`${URL}/payment_dues`, requestOptions)
+  
+  return fetch(newUrl, requestOptions)
     .then(response => handler(response));
 }
 
