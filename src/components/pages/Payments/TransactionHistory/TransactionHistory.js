@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Table, Divider } from 'semantic-ui-react'
+import { Table, Divider, Form, Button } from 'semantic-ui-react'
 
 import { getDateFromString, getBDTCurrency } from './../../../common';
 import { paymentActions } from './../../../../actions';
 
-class Statistics extends React.Component {
+class TransactionHistory extends React.Component {
   componentWillMount() {
     this.props.dispatch(paymentActions.getStatistics('', ''));
   }
+  
+  historyFormHandler = () => {
+    const FromDate = this.refs.FromDate.value;
+    const ToDate = this.refs.ToDate.value;
+    this.props.dispatch(paymentActions.getStatistics(FromDate, ToDate));
+  }
+
   render() {
     const { statistics } = this.props;
     return (
@@ -18,6 +25,28 @@ class Statistics extends React.Component {
           <h2>Transaction History</h2>
           <Divider />
         </div>
+        <Form onSubmit={this.historyFormHandler}>
+          <Form.Group inline>
+            <Form.Field>
+              <label htmlFor="FromDate">From Date</label>
+              <input 
+                ref='FromDate'
+                type="date"/>
+            </Form.Field>
+
+            <Form.Field>
+              <label htmlFor="ToDate">To Date</label>
+              <input 
+                ref='ToDate'
+                type="date"/>
+            </Form.Field>
+
+            <Form.Field>
+              <Button type='submit'>Submit</Button>
+            </Form.Field>
+          </Form.Group>
+        </Form>
+
         <Table celled striped>
           <Table.Header>
             <Table.Row>
@@ -47,7 +76,7 @@ class Statistics extends React.Component {
   }
 }
 
-Statistics.propTypes = {
+TransactionHistory.propTypes = {
   statistics: PropTypes.array
 }
 
@@ -58,5 +87,5 @@ function mapStateToProps(state) {
   }
 }
 
-const connectedStatistics = connect(mapStateToProps)(Statistics);
-export { connectedStatistics as Statistics };
+const connectedTransactionHistory = connect(mapStateToProps)(TransactionHistory);
+export { connectedTransactionHistory as TransactionHistory };

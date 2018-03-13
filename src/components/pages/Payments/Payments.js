@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 
-import { Statistics } from './Statistics';
+import { TransactionHistory } from './TransactionHistory';
 import { PayForm } from './PayForm';
 import { PaymentDue } from './PaymentDue';
 
@@ -16,7 +16,7 @@ class Payments extends React.Component {
           <Grid.Column>
             <div className="Payment">
               <Switch>
-                <Route exact path={`${match.url}`} component={Statistics} />
+                <Route exact path={`${match.url}`} component={TransactionHistory} />
                 <Route exact path={`${match.url}/payment_dues`} component={PaymentDue} />
                 <Route path={`${match.url}/users/:UserId`} component={PayForm} />
               </Switch>

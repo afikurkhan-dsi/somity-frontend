@@ -10,12 +10,15 @@ export const paymentService = {
 }
 
 function getStatistics(FromDate, ToDate) {
+  let newUrl = URL+ `/financial_statistics`;
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
   };
-
-  return fetch(URL+ `/financial_statistics`, requestOptions)
+  if(FromDate && ToDate) {
+    newUrl += `?FromDate=${FromDate}&ToDate=${ToDate}`
+  }
+  return fetch(newUrl, requestOptions)
     .then(response => handler(response));
 }
 
