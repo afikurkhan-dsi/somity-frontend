@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import { Form, Button, Grid } from 'semantic-ui-react';
 
 import { paymentActions } from './../../../../actions';
 
@@ -14,8 +14,8 @@ class PayForm extends React.Component {
   submitPayment(e) {
     e.preventDefault();
     const UserId = this.props.match.params.UserId,
-          PaymentDate = moment().format('YYYY-MM-D'),
-          PaymentAmount  =this.refs.PaymentAmount.value,
+          PaymentDate = this.refs.PaymentDate.value,
+          PaymentAmount = this.refs.PaymentAmount.value,
           SubmitterNote = this.refs.SubmitterNote.value,
           SubmittedBy = JSON.parse(localStorage.getItem('username'));
     this.props.dispatch(
@@ -27,36 +27,44 @@ class PayForm extends React.Component {
     const { paid } = this.props;
     const { submitPayment } = this;
     return (
-      <div className="row">
+      <Grid>
         {paid ? <Redirect to='/dashboard/payments'/> : null }
-        <div className="col-md-5">
-          <form onSubmit={submitPayment}>
-            <div className="form-group">
+        <Grid.Column width={6}>
+          <Form onSubmit={submitPayment}>
+            <Form.Field>
               <label htmlFor="PaymentAmount">Payment Amount</label>
               <input
                 type="number"
                 ref="PaymentAmount"
                 id="PaymentAmount"
-                className="form-control"
                 required />
-            </div>
+            </Form.Field>
 
-            <div className="form-group">
+            <Form.Field>
+              <label htmlFor="PaymentDate">Payment Date</label>
+              <input
+                type="date"
+                ref="PaymentDate"
+                id="PaymentDate"
+                required />
+            </Form.Field>
+
+            <Form.Field>
               <label htmlFor="SubmitterNote">Note</label>
               <textarea 
                 ref="SubmitterNote"
                 id="SubmitterNote"
-                className="form-control"
                 rows="3"></textarea>
-            </div>
-            <div className="form-group">
-              <button
+            </Form.Field>
+
+            <Form.Field>
+              <Button
                 type="submit"
-                className="btn btn-primary">Submit Paymnet</button>
-            </div>
-          </form>
-        </div>
-      </div>
+                primary>Submit Paymnet</Button>
+            </Form.Field>
+          </Form>
+        </Grid.Column>
+      </Grid>
     )
   }
 }
