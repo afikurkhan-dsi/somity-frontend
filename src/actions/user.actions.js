@@ -39,11 +39,11 @@ function logout() {
   return { type: userConstants.LOGOUT };
 }
 
-function getAll() {
+function getAll(Username, FirstName, LastName, Email, Phone) {
   return dispatch => {
     dispatch(request());
 
-    userService.getAll()
+    userService.getAll(Username, FirstName, LastName, Email, Phone)
       .then(
         users => dispatch(success(users)),
         error => handleError(dispatch, userConstants.GETALL_FAILURE, error)
