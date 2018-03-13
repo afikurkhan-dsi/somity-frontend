@@ -5,7 +5,8 @@ import URL from './url';
 export const paymentService = {
   getStatistics,
   pay,
-  getPaymentDue
+  getPaymentDue,
+  getPaymenById
 }
 
 function getStatistics(FromDate, ToDate) {
@@ -42,5 +43,15 @@ function getPaymentDue(Username='', FirstName='', LastName, Email, Phone) {
   }
 
   return fetch(`${URL}/payment_dues`, requestOptions)
+    .then(response => handler(response));
+}
+
+function getPaymenById(UserId) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  };
+
+  return fetch(`${URL}/users/${UserId}/payments`, requestOptions)
     .then(response => handler(response));
 }

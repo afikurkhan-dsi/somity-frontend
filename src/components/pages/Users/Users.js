@@ -53,14 +53,14 @@ class Users extends React.Component {
     
     return (
       <Grid divided='vertically' padded='horizontally'>
+        {users.loading ?
+          <Dimmer active inverted>
+            <Loader inverted>Loading</Loader>
+          </Dimmer> : 
+          null
+        }
         <Grid.Row columns={1}>
           <Grid.Column>
-            {users.loading ?
-              <Dimmer active inverted>
-                <Loader inverted>Loading</Loader>
-              </Dimmer> : 
-              null
-            }
             <h1 className="h2" style={{display: 'inline'}}>Users</h1>
 
             <Modal 

@@ -5,7 +5,8 @@ import { handleError } from './handler.actions';
 export const paymentActions = {
   getStatistics,
   pay,
-  getPaymentDue
+  getPaymentDue,
+  getPaymenById
 }
 
 function getStatistics(FromDate, ToDate) {
@@ -44,9 +45,22 @@ function getPaymentDue(Username, FirstName, LastName, Email, Phone) {
     paymentService.getPaymentDue(Username, FirstName, LastName, Email, Phone)
       .then(
         data => dispatch(success(data)),
-        error => handleError(dispatch, paymentConstants)
+        error => handleError(dispatch, paymentConstants.FAILURE_PAYMENT_DUE)
       );
   }
   function request() { return { type: paymentConstants.REQUEST_PAYMENT_DUE } }
   function success(data) { return { type: paymentConstants.SUCCESS_PAYMENT_DUE, data } }
+}
+
+function getPaymenById(UserId) {
+  return dispatch => {
+    dispatch (request());
+    paymentService.getPaymenById(UserId)
+      .then(
+        data => dispatch(success(data)),
+        error => handleError(dispatch, paymentConstants.GET_PAYMENT_BY_ID_FAILURE)
+      );
+  }
+  function request() { return { type: paymentConstants.GET_PAYMENT_BY_ID_REQUEST } }
+  function success(data) { return { type: paymentConstants.GET_PAYMENT_BY_ID_SUCCESS, data } }
 }

@@ -49,6 +49,21 @@ export function payment(state={}, action) {
         loaded: false,
         error: action.error
       }
+    case paymentConstants.GET_PAYMENT_BY_ID_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case paymentConstants.GET_PAYMENT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        payments: action.data
+      }
+    case paymentConstants.GET_PAYMENT_BY_ID_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      }
     default:
       return state;
 

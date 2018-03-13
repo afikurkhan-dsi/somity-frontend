@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Image, Divider } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
-import { userActions } from '../../../actions';
+import { userActions, paymentActions } from '../../../actions';
+import { UserInfo } from './UserInfo';
+import { IndividualPaymentHistory } from './IndividualPaymentHistory';
 
 class Profile extends Component {
   componentDidMount() {
-    this.props.dispatch(userActions.get(this.props.match.params.UserId))
+    this.props.dispatch(userActions.get(this.props.match.params.UserId));
+    this.props.dispatch(paymentActions.getPaymenById(this.props.match.params.UserId));
   }
   render() {
+    const { payments, user } = this.props;
     return (
       <Grid padded='horizontally'>
         <Grid.Row>
           <Grid.Column>
-            <h2>Profile</h2>
-            <Divider />
-
-            { this.props.user &&
-            <div className="userInfo">
-              <Image src="http://via.placeholder.com/150x150" circular/>
-              <div className="text-center">
-                <h3 style={{fontWeight: '700'}}>{this.props.user.FirstName} {this.props.user.LastName}</h3>
-                <address>
-                  {this.props.user.Address}
-                </address>
-                <p>{this.props.user.Phone} &#9675; {this.props.user.Email}</p>
-              </div>
-            </div>
+            { user &&
+              <UserInfo user={user}/>
+            }
+            <br/><br/>
+            {payments &&
+              <IndividualPaymentHistory payments={payments} />
             }
           </Grid.Column>
         </Grid.Row>
@@ -37,8 +33,10 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
   const { user } = state.users;
+  const { payments } = state.payment
   return {
-    user
+    user,
+    payments
   }
 }
 
